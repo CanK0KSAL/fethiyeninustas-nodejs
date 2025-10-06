@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Tailwind v4 tema tokenları (altın rengi vs.) */
+@theme {
+  --color-brand-gold: #D4AF37;   /* => bg-brand-gold, text-brand-gold ... */
+  --radius-2xl: 1rem;            /* => rounded-2xl */
+}
+
+/* (İsteğe bağlı) Resmi pluginler */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/aspect-ratio";
+
+/* Reusable UI + Header stilleri */
+@layer components {
+  /* Konteyner */
+  .section { @apply max-w-7xl mx-auto; }
+
+  /* CTA butonlar (ileride lazım olur) */
+  .btn-primary { @apply bg-brand-gold text-white px-5 py-3 rounded-2xl font-medium shadow hover:opacity-90 transition; }
+  .btn-ghost   { @apply border border-brand-gold text-brand-gold px-5 py-3 rounded-2xl font-medium hover:bg-brand-gold/10 transition; }
+
+  /* Düz nav satırı (kapsül yok) */
+  .nav-row { @apply flex items-center gap-6; }
+
+  .nav-link {
+    @apply relative px-1 py-2 text-[15px] font-semibold text-neutral-900;
+  }
+  .nav-link::after {
+    content: "";
+    @apply absolute left-0 right-0 -bottom-[6px] h-[2px] bg-brand-gold scale-x-0 origin-left transition-transform;
+  }
+  .nav-link:hover::after,
+  .nav-link-active::after { transform: scaleX(1); }
+
+  .badge { @apply inline-flex items-center rounded-full bg-brand-gold/15 px-2 py-0.5 text-[11px] font-medium text-brand-gold; }
+
+  /* Dil seçici */
+  .lang-pill { @apply inline-flex items-center gap-1 rounded-full border border-black/15 bg-white p-1 shadow-sm; }
+  .lang-btn { @apply rounded-full px-3 py-1.5 text-[13px] font-semibold text-neutral-800 hover:bg-black/[.04]; }
+  .lang-btn-active { @apply bg-brand-gold text-white shadow; }
+}
+
+/* Arka plan & metin */
+body { @apply bg-neutral-50 text-neutral-900 antialiased; }
